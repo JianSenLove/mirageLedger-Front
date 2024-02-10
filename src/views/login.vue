@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">后台管理系统</div>
+            <div class="ms-title">教务管理系统</div>
             <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
                     <el-input v-model="param.username" placeholder="username">
@@ -26,7 +26,7 @@
                     <el-button type="primary" @click="submitForm(login)">登录</el-button>
                 </div>
                 <el-checkbox class="login-tips" v-model="checked" label="记住密码" size="large" />
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
+                <p class="login-tips">(教师端)</p>
             </el-form>
         </div>
     </div>
