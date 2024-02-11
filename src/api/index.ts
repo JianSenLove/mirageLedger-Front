@@ -162,6 +162,4 @@ export const getCourseEvaluationPage = (courseId: string, queryParam) => {
         method: 'get',
         params: queryParam
     });
-        }
-    });
 };
