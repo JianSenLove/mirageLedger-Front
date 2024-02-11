@@ -1,30 +1,47 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import router from '../router';
 
 const service: AxiosInstance = axios.create({
     timeout: 5000
 });
 
+// 请求拦截器
 service.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
+        // 获取 token
+        const token = localStorage.getItem('jwt_token');
+        if (token) {
+            // 如果 token 存在，添加到请求头
+            config.headers.Authorization = `Bearer ${token}`;
+        }
         return config;
     },
     (error: AxiosError) => {
-        console.log(error);
-        return Promise.reject();
+        // console.log(error);
+        return Promise.reject(error);
     }
 );
 
+// 响应拦截器
 service.interceptors.response.use(
     (response: AxiosResponse) => {
+        // 这里可以根据项目需要处理响应
         if (response.status === 200) {
-            return response;
-        } else {
-            Promise.reject();
+            return response.data;
         }
+        return response.data;
     },
     (error: AxiosError) => {
-        console.log(error);
-        return Promise.reject();
+        if (error.response && error.response.status === 401) {
+            localStorage.removeItem('jwt_token');
+            router.push('/login');
+            
+        }
+        // 这里可以添加全局的错误处理逻辑
+        if (error.response.data.message) {
+            return Promise.reject(error.response.data.message);
+        }
+        return Promise.reject(error);
     }
 );
 

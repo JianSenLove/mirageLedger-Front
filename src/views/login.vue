@@ -6,7 +6,7 @@
                 <el-form-item prop="username">
                     <el-input v-model="param.username" placeholder="username">
                         <template #prepend>
-                            <el-button :icon="User"></el-button>
+                            <el-button :icon="User" tabindex="-1"></el-button>
                         </template>
                     </el-input>
                 </el-form-item>
@@ -14,7 +14,7 @@
                     <el-input type="password" placeholder="password" v-model="param.password"
                         @keyup.enter="submitForm(login)">
                         <template #prepend>
-                            <el-button :icon="Lock"></el-button>
+                            <el-button :icon="Lock" tabindex="-1"></el-button>
                         </template>
                     </el-input>
                 </el-form-item>
@@ -65,18 +65,21 @@ const rules: FormRules = {
 };
 const permiss = usePermissStore();
 const login = ref<FormInstance>();
-const submitForm = (formEl: FormInstance | undefined) => {
+    const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.validate(async (valid: boolean) => {
         if (valid) {
             try {
+                // 直接调用登录接口，响应数据已经是response.data
                 const response = await userLogin(param.username, param.password);
-                if (response.status === 200 && response.data.token) {
+                console.log(response);
+                // 判断响应中是否包含token，此时response直接是数据部分
+                if (response.token) {
                     ElMessage.success('登录成功');
                     // 保存用户凭证
-                    localStorage.setItem('jwt_token', response.data.token);
+                    localStorage.setItem('jwt_token', response.token); // 直接使用response.token
                     localStorage.setItem('ms_username', param.username);
-                    const keys = permiss.defaultList[param.username == 'admin' ? 'admin' : 'user'];
+                    const keys = permiss.defaultList[param.username === 'admin' ? 'admin' : 'user'];
                     permiss.handleSet(keys);
                     localStorage.setItem('ms_keys', JSON.stringify(keys));
                     router.push('/');
@@ -86,15 +89,18 @@ const submitForm = (formEl: FormInstance | undefined) => {
                         localStorage.removeItem('login-param');
                     }
                 } else {
-                    ElMessage.error('登录失败');
+                    // 如果响应中没有token，视为登录失败
+                    ElMessage.error('登录失败: 账号或密码错误');
                     return false;
                 }
             } catch (error) {
-                ElMessage.error('登录失败: ' + error.message);
+                // 捕获到错误，可能是请求失败或者其他原因
+                ElMessage.error('登录失败: ' + error);
                 return false;
             }
         } else {
-            ElMessage.error('登录失败');
+            // 账号信息验证未通过
+            ElMessage.error('请填入账号密码');
             return false;
         }
     });
@@ -111,7 +117,7 @@ tags.clearTags();
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/img/login-bg.jpg);
+    background-image: url(../assets/img/login_bg.jpg);
     background-size: 100%;
 }
 
