@@ -8,10 +8,12 @@ const service: AxiosInstance = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
-        // 获取 token
-        const token = localStorage.getItem('jwt_token');
-        if (token) {
-            // 如果 token 存在，添加到请求头
+        // 检查当前请求是否为登录请求
+        if (!config.url.endsWith('/login')) {
+            const token = localStorage.getItem('jwt_token');
+            if (!token) {
+                router.push('/login');
+            }
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
@@ -35,7 +37,7 @@ service.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             localStorage.removeItem('jwt_token');
             router.push('/login');
-            
+
         }
         // 这里可以添加全局的错误处理逻辑
         if (error.response.data.message) {
