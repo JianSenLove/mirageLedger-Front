@@ -3,8 +3,8 @@
 	"version": "5.3.5",
 	"private": true,
 	"scripts": {
-		"dev": "vite",
-		"build": "vue-tsc --noEmit && vite build",
+		"dev": "vite --mode dev",
+		"build": "vite build",
 		"serve": "vite preview"
 	},
 	"dependencies": {

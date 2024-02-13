@@ -7,10 +7,11 @@
 				<el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
-				<el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
+				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
 				<el-table-column prop="name" label="课程名" align="center"></el-table-column>
 				<el-table-column prop="teacherName" label="课程教师" align="center"></el-table-column>
 				<el-table-column prop="year" label="课程学年" align="center"></el-table-column>
+				<el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
 				<el-table-column label="课程开设状态" align="center">
 					<template #default="scope">
 						<el-tag :type="scope.row.state ? 'success' : 'danger'">
@@ -18,8 +19,6 @@
 						</el-tag>
 					</template>
 				</el-table-column>
-
-				<el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
 				<el-table-column label="操作" width="280" align="center">
 					<template #default="scope">
 						<el-button type="warning" size="small" :icon="View" @click="handleView(scope.row)">

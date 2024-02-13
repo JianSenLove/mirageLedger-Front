@@ -53,5 +53,7 @@ declare module '@vue/runtime-core' {
     TableDetail: typeof import('./src/components/table-detail.vue')['default']
     TableEdit: typeof import('./src/components/table-edit.vue')['default']
     Tags: typeof import('./src/components/tags.vue')['default']
+    UserDetail: typeof import('./src/components/user/user-detail.vue')['default']
+    UserEdit: typeof import('./src/components/user/user-edit.vue')['default']
   }
 }

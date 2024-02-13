@@ -10,7 +10,7 @@ export const fetchData = () => {
 // 登录请求
 export const userLogin = (code: string, password: string) => {
     return request({
-        url: 'http://127.0.0.1:8081/mirageLedger/user/login',
+        url: '/mirageLedger/user/login',
         method: 'post',
         data: {
             code,
@@ -20,57 +20,52 @@ export const userLogin = (code: string, password: string) => {
 };
 
 // 注册请求
-export const register = (code: string, password: string) => {
+export const register = (user: any) => {
     return request({
-        url: 'http://127.0.0.1:8081/mirageLedger/user/register',
+        url: '/mirageLedger/user/register',
         method: 'post',
-        data: {
-            code,
-            password
-        }
+        data: user
     });
 };
 
 // 用户详情
 export const getUser = (id: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/user/${id}`,
+        url: `/mirageLedger/user/${id}`,
         method: 'get'
     });
 };
 
 // 修改用户
-export const updateUser = (id: string, name: string, password: string) => {
+export const updateUser = (id: string, form: any) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/user/${id}`,
+        url: `/mirageLedger/user/${id}`,
         method: 'put',
-        data: {
-            name: name,
-            password: password
-        }
+        data: form
     });
 };
 
 // 删除用户
 export const deleteUser = (id: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/user/${id}`,
+        url: `/mirageLedger/user/${id}`,
         method: 'delete'
     });
 };
 
 // 用户列表
-export const getUserPage = () => {
+export const getUserPage = (query: any) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/user`,
-        method: 'get'
+        url: `/mirageLedger/user`,
+        method: 'get',
+        params: query
     });
 };
 
 // 新增课程
 export const createCourse = (name: string, teacherId: string, term: string) => {
     return request({
-        url: 'http://127.0.0.1:8081/mirageLedger/course',
+        url: '/mirageLedger/course',
         method: 'post',
         data: {
             name,
@@ -83,7 +78,7 @@ export const createCourse = (name: string, teacherId: string, term: string) => {
 // 课程详情
 export const getCourse = (id: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/course/${id}`,
+        url: `/mirageLedger/course/${id}`,
         method: 'get'
     });
 };
@@ -91,7 +86,7 @@ export const getCourse = (id: string) => {
 // 修改课程
 export const updateCourse = (id: string, name: string, password: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/course/${id}`,
+        url: `/mirageLedger/course/${id}`,
         method: 'put',
         data: {
             name: name,
@@ -103,7 +98,7 @@ export const updateCourse = (id: string, name: string, password: string) => {
 // 删除课程
 export const deleteCourse = (id: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/course/${id}`,
+        url: `/mirageLedger/course/${id}`,
         method: 'delete'
     });
 };
@@ -111,7 +106,7 @@ export const deleteCourse = (id: string) => {
 // 课程列表
 export const getCoursePage = () => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/course`,
+        url: `/mirageLedger/course`,
         method: 'get'
     });
 };
@@ -119,7 +114,7 @@ export const getCoursePage = () => {
 // 新增课程评价
 export const createCourseEvaluation = (courseId: string, type: string, score: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/${courseId}/evaluation`,
+        url: `/mirageLedger/${courseId}/evaluation`,
         method: 'post',
         data: {
             type,
@@ -131,7 +126,7 @@ export const createCourseEvaluation = (courseId: string, type: string, score: st
 // 课程评价详情
 export const getCourseEvaluation = (courseId: string, id: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/${courseId}/evaluation/${id}`,
+        url: `/mirageLedger/${courseId}/evaluation/${id}`,
         method: 'get'
     });
 };
@@ -139,7 +134,7 @@ export const getCourseEvaluation = (courseId: string, id: string) => {
 // 修改课程评价
 export const updateCourseEvaluation = (courseId: string, id: string, score: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/${courseId}/evaluation/${id}`,
+        url: `/mirageLedger/${courseId}/evaluation/${id}`,
         method: 'put',
         data: {
             score: score
@@ -150,7 +145,7 @@ export const updateCourseEvaluation = (courseId: string, id: string, score: stri
 // 删除课程评价
 export const deleteCourseEvaluation = (courseId: string, id: string) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/${courseId}/evaluation/${id}`,
+        url: `/mirageLedger/${courseId}/evaluation/${id}`,
         method: 'delete'
     });
 };
@@ -158,7 +153,7 @@ export const deleteCourseEvaluation = (courseId: string, id: string) => {
 // 课程评价列表
 export const getCourseEvaluationPage = (courseId: string, queryParam) => {
     return request({
-        url: `http://127.0.0.1:8081/mirageLedger/${courseId}/evaluation`,
+        url: `/mirageLedger/${courseId}/evaluation`,
         method: 'get',
         params: queryParam
     });
