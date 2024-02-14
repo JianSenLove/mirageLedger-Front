@@ -71,7 +71,7 @@
 import { ref, reactive } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Edit, Search, CirclePlusFilled, View } from '@element-plus/icons-vue';
-import { fetchData } from '../api/index';
+import { getUserPage } from '../api/index';
 import TableEdit from '../components/table-edit.vue';
 import TableDetail from '../components/table-detail.vue';
 
@@ -86,18 +86,17 @@ interface TableItem {
 }
 
 const query = reactive({
-	address: '',
 	name: '',
-	pageIndex: 1,
-	pageSize: 10
+	page: 1,
+	rows: 10
 });
 const tableData = ref<TableItem[]>([]);
 const pageTotal = ref(0);
 // 获取表格数据
 const getData = async () => {
-	const res = await fetchData();
-	tableData.value = res.data.list;
-	pageTotal.value = res.data.pageTotal || 50;
+	const res = await getUserPage(query);
+	tableData.value = res.records;
+	pageTotal.value = res.total || 50;
 };
 getData();
 

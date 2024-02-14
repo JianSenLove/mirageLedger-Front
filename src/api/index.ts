@@ -63,15 +63,11 @@ export const getUserPage = (query: any) => {
 };
 
 // 新增课程
-export const createCourse = (name: string, teacherId: string, term: string) => {
+export const createCourse = (course: any) => {
     return request({
         url: '/mirageLedger/course',
         method: 'post',
-        data: {
-            name,
-            teacherId,
-            term
-        }
+        data: course
     });
 };
 
@@ -84,14 +80,11 @@ export const getCourse = (id: string) => {
 };
 
 // 修改课程
-export const updateCourse = (id: string, name: string, password: string) => {
+export const updateCourse = (id: string, course: any) => {
     return request({
         url: `/mirageLedger/course/${id}`,
         method: 'put',
-        data: {
-            name: name,
-            password: password
-        }
+        data: course
     });
 };
 
@@ -104,10 +97,11 @@ export const deleteCourse = (id: string) => {
 };
 
 // 课程列表
-export const getCoursePage = () => {
+export const getCoursePage = (query: any) => {
     return request({
         url: `/mirageLedger/course`,
-        method: 'get'
+        method: 'get',
+        params: query
     });
 };
 

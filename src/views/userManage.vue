@@ -10,6 +10,7 @@
 				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
 				<el-table-column prop="code" label="工号" align="center"></el-table-column>
 				<el-table-column prop="name" label="用户名" align="center"></el-table-column>
+				<el-table-column prop="desc" label="描述" align="center"></el-table-column>
 				<el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
 				<el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
 				<el-table-column label="账号状态" width="100" align="center">
@@ -62,7 +63,8 @@ interface UserDetail {
 	id: string;
 	code: string;
 	name: string;
-	password: number;
+	password: string;
+	desc: string;
 	createTime: string;
 	updateTime: string;
 	state: string;

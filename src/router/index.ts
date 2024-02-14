@@ -161,10 +161,19 @@ const routes: RouteRecordRaw[] = [
                 path: '/evaluationManage',
                 name: 'evaluationManage',
                 meta: {
-                    title: '课程管理',
+                    title: '课程评价管理',
                     permiss: '1',
                 },
                 component: () => import(/* webpackChunkName: "import" */ '../views/evaluationManage.vue'),
+            },
+            {
+                path: '/courseEvaluationDetail/:id',
+                name: 'courseEvaluationDetail',
+                meta: {
+                    title: '课程评价详情',
+                    permiss: '1',
+                },
+                component: () => import(/* webpackChunkName: "import" */ '../views/courseEvaluationDetail.vue'),
             }
         ],
     },

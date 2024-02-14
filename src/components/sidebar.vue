@@ -55,13 +55,6 @@ const items = [
         index: '/userManage',
         title: '教师管理',
         permiss: '4',
-        // subs: [
-        //     {
-        //         index: '/userManage',
-        //         title: '用户管理',
-        //         permiss: '4',
-        //     }
-        // ]
     },
     {
         icon: 'Odometer',
