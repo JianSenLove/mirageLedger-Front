@@ -1,7 +1,7 @@
 <template>
 	<el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
 		<el-form-item label="学生评价" prop="comment">
-			<el-input v-model="form.courseName" :disabled="edit"></el-input>
+			<el-input v-model="form.comment" :disabled="edit"></el-input>
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="saveEdit(formRef)">
@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { ref } from 'vue';
-import { createCourseEvaluation,updateCourseEvaluation } from '../../api/index';
+import { createCourseComment,updateCourseComment } from '../../api/index';
 
 const props = defineProps({
 	data: {
@@ -29,23 +29,23 @@ const props = defineProps({
 	update: {
 		type: Function,
 		required: true
+	},
+	courseId: {
+		type: String,
+		required: true
 	}
 });
 
 const defaultData = {
 	id: '',
 	courseName: '',
+	courseId: '',
 	department: '',
 	userId: '',
 	userName: '',
 	year: '',
 	term: '',
-	teachingContent: '',
-	teachingMethod: '',
-	curriculumManagement: '',
-	courseAssessment: '',
-	teachingAttitude: '',
-	learningHarvest: '',
+	comment: '',
 	createTime: '',
 	updateTime: '',
 };
@@ -64,12 +64,11 @@ const saveEdit = async () => {
 				let response;
 				if (props.edit) {
 					// 如果是编辑模式
-					response = await updateCourseEvaluation(props.data.id, form.value);
+					response = await updateCourseComment(props.data.id, form.value);
 				} else {
 					// 如果是创建模式
-					form.value.userId = form.value.userName;
-					console.log(form.value);
-					response = await createCourseEvaluation(form.value);
+					form.value.courseId = props.courseId;
+					response = await createCourseComment(form.value);
 				}
 				props.update(response);
 				ElMessage.success(props.edit ? '保存成功！' : '创建成功！');

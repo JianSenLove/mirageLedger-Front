@@ -2,8 +2,9 @@
 	<div>
 		<div class="container">
 			<div class="search-box">
-				<el-input v-model="query.name" placeholder="课程名" class="search-input mr10" clearable></el-input>
+				<el-input v-model="query.courseId" placeholder="课程名" class="search-input mr10" clearable></el-input>
 				<el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
+				<el-button type="success" :icon="CirclePlusFilled" @click="generateComprehensiveEvaluation">生成课程综合评价指标</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
@@ -48,7 +49,7 @@
 			:close-on-click-modal="false"
 			@close="closeDialog"
 		>
-			<EvaluationEdit :data="rowData" :edit="idEdit" :update="updateData" />
+			<CommentEdit :data="rowData" :edit="idEdit" :update="updateData" :courseId="route.params.id" />
 		</el-dialog>
 	</div>
 </template>
@@ -58,13 +59,13 @@ import { ref, reactive } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, CirclePlusFilled } from '@element-plus/icons-vue';
 import { getCourseCommentPage,deleteCourseComment } from '../api/index';
-import EvaluationEdit from '../components/evaluation/evaluation-edit.vue';
-import EvaluationDetail from '../components/evaluation/evaluation-detail.vue';
+import CommentEdit from '../components/comment/comment-edit.vue';
+import CommentDetail from '../components/comment/comment-detail.vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-interface EvaluationDetail {
+interface CommentDetail {
 	id: string;
 	courseName: string;
 	department: string;
@@ -82,7 +83,7 @@ const query = reactive({
 	page: 1,
 	rows: 10
 });
-const tableData = ref<EvaluationDetail[]>([]);
+const tableData = ref<CommentDetail[]>([]);
 const pageTotal = ref(0);
 // 获取表格数据
 const getData = async () => {
@@ -111,18 +112,22 @@ const handleDelete = async (index: number) => {
 		ElMessage.success('删除成功');
 	} catch (error) {
 		if (error !== 'cancel') {
-			console.error('删除失败:', error);
 			ElMessage.error('删除失败');
 		}
 	}
 };
+
+const generateComprehensiveEvaluation = () => {
+	ElMessage.success('生成成功');
+};
+
 
 const visible = ref(false);
 let idx: number = -1;
 const idEdit = ref(false);
 const rowData = ref({});
 
-const updateData = (row: EvaluationDetail) => {
+const updateData = (row: CommentDetail) => {
 	if (idEdit.value) {
 		tableData.value[idx] = row;
 	} else {
