@@ -18,7 +18,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/dashboard',
                 name: 'dashboard',
                 meta: {
-                    title: '系统首页',
+                    title: '个人首页',
                     permiss: '1',
                 },
                 component: () => import(/* webpackChunkName: "dashboard" */ '../views/dashboard.vue'),
@@ -158,22 +158,22 @@ const routes: RouteRecordRaw[] = [
                 component: () => import(/* webpackChunkName: "import" */ '../views/courseManage.vue'),
             },
             {
-                path: '/evaluationManage',
-                name: 'evaluationManage',
-                meta: {
-                    title: '课程评价管理',
-                    permiss: '1',
-                },
-                component: () => import(/* webpackChunkName: "import" */ '../views/evaluationManage.vue'),
-            },
-            {
                 path: '/courseEvaluationDetail/:id',
                 name: 'courseEvaluationDetail',
                 meta: {
-                    title: '课程评价详情',
+                    title: '课程学生评价详情',
                     permiss: '1',
                 },
                 component: () => import(/* webpackChunkName: "import" */ '../views/courseEvaluationDetail.vue'),
+            },
+            {
+                path: '/courseEvaluationManage',
+                name: 'courseEvaluationManage',
+                meta: {
+                    title: '课程综合评分',
+                    permiss: '1',
+                },
+                component: () => import(/* webpackChunkName: "import" */ '../views/courseEvaluationManage.vue'),
             }
         ],
     },

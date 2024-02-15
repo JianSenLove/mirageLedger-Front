@@ -3,6 +3,9 @@
 		<el-form-item label="工号" prop="code">
 			<el-input v-model="form.code" :disabled="edit"></el-input>
 		</el-form-item>
+		<el-form-item label="工号" prop="code">
+			<el-input v-model="form.department" :disabled="edit"></el-input>
+		</el-form-item>
 		<el-form-item label="密码" prop="password">
 			<el-input type="password" v-model="form.password"></el-input>
 		</el-form-item>
@@ -47,6 +50,7 @@ const props = defineProps({
 const defaultData = {
 	id: '',
 	code: '',  // 用户登录账号
+	department: '',
 	password: '',  // 账号密码
 	confirmPassword: '',  // 确认密码
 	name: '',  // 用户名称
@@ -94,6 +98,7 @@ const rules: FormRules = {
 		{ validator: validateConfirmPassword, trigger: 'blur' }
 	],
 	name: [{ required: true, message: '请输入教师名称', trigger: 'blur' }],
+	department: [{ required: true, message: '请输入教师所属院系', trigger: 'blur' }]
 };
 const formRef = ref<FormInstance>();
 

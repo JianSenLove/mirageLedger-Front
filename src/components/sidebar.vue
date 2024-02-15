@@ -47,7 +47,7 @@ const items = [
     {
         icon: 'Odometer',
         index: '/dashboard',
-        title: '系统首页',
+        title: '个人首页',
         permiss: '1',
     },
     {
@@ -64,8 +64,8 @@ const items = [
     },
     {
         icon: 'Odometer',
-        index: '/evaluationManage',
-        title: '课程评价管理',
+        index: '/courseEvaluationManage',
+        title: '课程综合评分',
         permiss: '1',
     }
 ];

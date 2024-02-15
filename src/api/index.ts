@@ -106,49 +106,79 @@ export const getCoursePage = (query: any) => {
 };
 
 // 新增课程评价
-export const createCourseEvaluation = (courseId: string, type: string, score: string) => {
+export const createCourseEvaluation = (evaluation: any) => {
     return request({
-        url: `/mirageLedger/${courseId}/evaluation`,
+        url: `/mirageLedger/evaluation`,
         method: 'post',
-        data: {
-            type,
-            score
-        }
+        data: evaluation
     });
 };
 
 // 课程评价详情
-export const getCourseEvaluation = (courseId: string, id: string) => {
+export const getCourseEvaluation = (id: string) => {
     return request({
-        url: `/mirageLedger/${courseId}/evaluation/${id}`,
+        url: `/mirageLedger/evaluation/${id}`,
         method: 'get'
     });
 };
 
 // 修改课程评价
-export const updateCourseEvaluation = (courseId: string, id: string, score: string) => {
+export const updateCourseEvaluation = (id: string, evaluation: any) => {
     return request({
-        url: `/mirageLedger/${courseId}/evaluation/${id}`,
+        url: `/mirageLedger/evaluation/${id}`,
         method: 'put',
-        data: {
-            score: score
-        }
+        data: evaluation
     });
 };
 
 // 删除课程评价
-export const deleteCourseEvaluation = (courseId: string, id: string) => {
+export const deleteCourseEvaluation = (id: string) => {
     return request({
-        url: `/mirageLedger/${courseId}/evaluation/${id}`,
+        url: `/mirageLedger/evaluation/${id}`,
         method: 'delete'
     });
 };
 
 // 课程评价列表
-export const getCourseEvaluationPage = (courseId: string, queryParam) => {
+export const getCourseEvaluationPage = (queryParam: any) => {
     return request({
-        url: `/mirageLedger/${courseId}/evaluation`,
+        url: `/mirageLedger/evaluation`,
         method: 'get',
         params: queryParam
+    });
+};
+
+// 学生评论列表
+export const getCourseCommentPage = (queryParam: any) => {
+    return request({
+        url: `/mirageLedger/comment`,
+        method: 'get',
+        params: queryParam
+    });
+};
+
+// 新增学生评论
+export const createCourseComment = (comment: any) => {
+    return request({
+        url: `/mirageLedger/comment`,
+        method: 'post',
+        data: comment
+    });
+};
+
+// 修改学生评论
+export const updateCourseComment = (id: string, comment: any) => {
+    return request({
+        url: `/mirageLedger/comment/${id}`,
+        method: 'put',
+        data: comment
+    });
+};
+
+// 删除学生评论
+export const deleteCourseComment = (id: string) => {
+    return request({
+        url: `/mirageLedger/comment/${id}`,
+        method: 'delete',
     });
 };

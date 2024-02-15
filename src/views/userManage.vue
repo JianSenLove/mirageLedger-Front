@@ -9,6 +9,7 @@
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
 				<el-table-column prop="code" label="工号" align="center"></el-table-column>
+				<el-table-column prop="department" label="所属学院" align="center"></el-table-column>
 				<el-table-column prop="name" label="用户名" align="center"></el-table-column>
 				<el-table-column prop="desc" label="描述" align="center"></el-table-column>
 				<el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
@@ -63,6 +64,7 @@ interface UserDetail {
 	id: string;
 	code: string;
 	name: string;
+	department: string;
 	password: string;
 	desc: string;
 	createTime: string;

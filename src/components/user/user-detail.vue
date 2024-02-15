@@ -9,12 +9,20 @@
 			{{ data.code }}
 		</el-descriptions-item>
 		<el-descriptions-item>
+			<template #label> 所属院系 </template>
+			{{ data.department }}
+		</el-descriptions-item>
+		<el-descriptions-item>
 			<template #label> 用户名 </template>
 			{{ data.name }}
 		</el-descriptions-item>
 		<el-descriptions-item>
 			<template #label> 密码 </template>
 			{{ data.password }}
+		</el-descriptions-item>
+		<el-descriptions-item>
+			<template #label> 描述 </template>
+			{{ data.desc }}
 		</el-descriptions-item>
 		<el-descriptions-item>
 			<template #label> 创建时间 </template>

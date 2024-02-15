@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CommentEdit: typeof import('./src/components/comment/comment-edit.vue')['default']
     CourseDetail: typeof import('./src/components/course/course-detail.vue')['default']
     CourseEdit: typeof import('./src/components/course/course-edit.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
@@ -48,6 +49,8 @@ declare module '@vue/runtime-core' {
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    EvaluationDetail: typeof import('./src/components/evaluation/evaluation-detail.vue')['default']
+    EvaluationEdit: typeof import('./src/components/evaluation/evaluation-edit.vue')['default']
     Header: typeof import('./src/components/header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

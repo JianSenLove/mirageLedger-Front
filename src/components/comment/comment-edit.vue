@@ -1,19 +1,7 @@
 <template>
 	<el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
-		<el-form-item label="课程名称" prop="name">
-			<el-input v-model="form.name" :disabled="edit"></el-input>
-		</el-form-item>
-		<el-form-item label="课程教师" prop="userName">
-			<el-input v-model="form.userName"></el-input>
-		</el-form-item>
-		<el-form-item label="课程学年" prop="year">
-			<el-input v-model="form.year"></el-input>
-		</el-form-item>
-		<el-form-item label="课程学期" prop="term">
-			<el-input v-model="form.term"></el-input>
-		</el-form-item>
-		<el-form-item label="课程描述" prop="desc">
-			<el-input type="textarea" v-model="form.desc"></el-input>
+		<el-form-item label="学生评价" prop="comment">
+			<el-input v-model="form.courseName" :disabled="edit"></el-input>
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="saveEdit(formRef)">
@@ -27,7 +15,7 @@
 <script lang="ts" setup>
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { ref } from 'vue';
-import { createCourse, updateCourse } from '../../api/index';
+import { createCourseEvaluation,updateCourseEvaluation } from '../../api/index';
 
 const props = defineProps({
 	data: {
@@ -46,12 +34,18 @@ const props = defineProps({
 
 const defaultData = {
 	id: '',
-	name: '',
-	userName: '',
+	courseName: '',
+	department: '',
 	userId: '',
+	userName: '',
 	year: '',
 	term: '',
-	desc:'',
+	teachingContent: '',
+	teachingMethod: '',
+	curriculumManagement: '',
+	courseAssessment: '',
+	teachingAttitude: '',
+	learningHarvest: '',
 	createTime: '',
 	updateTime: '',
 };
@@ -59,12 +53,7 @@ const defaultData = {
 const form = ref({ ...(props.edit ? props.data : defaultData)});
 
 const rules: FormRules = {
-	userName: [{ required: true, message: '请选择教师', trigger: 'blur' }],
-	term: [
-	{ required: true, message: '请输入学期', trigger: 'blur' }
-	],
-	name: [{ required: true, message: '请输入课程名称', trigger: 'blur' }],
-	year: [{ required: true, message: '请输入学年', trigger: 'blur' }],
+
 };
 const formRef = ref<FormInstance>();
 
@@ -75,12 +64,12 @@ const saveEdit = async () => {
 				let response;
 				if (props.edit) {
 					// 如果是编辑模式
-					response = await updateCourse(props.data.id, form.value);
+					response = await updateCourseEvaluation(props.data.id, form.value);
 				} else {
 					// 如果是创建模式
 					form.value.userId = form.value.userName;
 					console.log(form.value);
-					response = await createCourse(form.value);
+					response = await createCourseEvaluation(form.value);
 				}
 				props.update(response);
 				ElMessage.success(props.edit ? '保存成功！' : '创建成功！');
