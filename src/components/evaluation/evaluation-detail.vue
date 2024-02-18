@@ -6,7 +6,7 @@
 		</el-descriptions-item>
 		<el-descriptions-item>
 			<template #label> 课程名称 </template>
-			{{ data.courseame }}
+			{{ data.courseName }}
 		</el-descriptions-item>
 		<el-descriptions-item>
 			<template #label> 课程院系 </template>

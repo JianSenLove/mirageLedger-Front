@@ -104,6 +104,7 @@ interface EvaluationDetail {
 	courseAssessment: string;
 	teachingAttitude: string;
 	learningHarvest: string;
+	state: boolean;
 	createTime: string;
 	updateTime: string;
 }
@@ -188,8 +189,7 @@ const handleView = (row: EvaluationDetail) => {
 // 跳转到课程评价
 const router = useRouter();
 const turnToEvaluation = (row: EvaluationDetail) => {
-  // 假设 row.id 是课程的唯一标识
-  router.push({ name: 'courseEvaluationEchars', params: { data: row } });
+  router.push({ name: 'courseEvaluationEchars', params: { evaluationId: row.id } });
 };
 </script>
 
