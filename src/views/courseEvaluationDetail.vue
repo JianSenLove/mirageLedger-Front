@@ -107,14 +107,14 @@ const generateComprehensiveEvaluation = async () => {
 		const query_page = {
 			courseId: route.params.id,
 			page: 1,
-			rows: 5000
+			rows: 10
 		};
 		const res = await getCourseCommentPage(query_page);
 		if (res.records.length === 0) {
 			ElMessage.error('暂无评价数据');
 			return;
 		}
-		const py_result = classifyAndAnalyseRemark(res.records);
+		const py_result =  await classifyAndAnalyseRemark(res.records);
 		if (!py_result) {
 			ElMessage.error('生成失败');
 			return;
