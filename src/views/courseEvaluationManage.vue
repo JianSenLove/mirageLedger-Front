@@ -189,7 +189,7 @@ const handleView = (row: EvaluationDetail) => {
 // 跳转到课程评价
 const router = useRouter();
 const turnToEvaluation = (row: EvaluationDetail) => {
-  router.push({ name: 'courseEvaluationEchars', params: { evaluationId: row.id.toString() } });
+  router.push({ name: 'courseEvaluationEchars', params: { evaluationId: row.id } });
 };
 </script>
 
