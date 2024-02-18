@@ -4,7 +4,8 @@
 			<div class="search-box">
 				<el-input v-model="query.courseId" placeholder="课程名" class="search-input mr10" clearable></el-input>
 				<el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
-				<el-button type="success" :icon="CirclePlusFilled" @click="generateComprehensiveEvaluation">生成课程综合评价指标</el-button>
+				<el-button type="success" :icon="CirclePlusFilled"
+					@click="generateComprehensiveEvaluation">生成课程综合评价指标</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
@@ -18,37 +19,20 @@
 				<el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
 				<el-table-column label="操作" width="280" align="center">
 					<template #default="scope">
-						<el-button
-							type="danger"
-							size="small"
-							:icon="Delete"
-							@click="handleDelete(scope.$index)"
-							v-permiss="16"
-						>
+						<el-button type="danger" size="small" :icon="Delete" @click="handleDelete(scope.$index)"
+							v-permiss="16">
 							删除
 						</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
 			<div class="pagination">
-				<el-pagination
-					background
-					layout="total, prev, pager, next"
-					:current-page="query.page"
-					:page-size="query.rows"
-					:total="pageTotal"
-					@current-change="handlePageChange"
-				></el-pagination>
+				<el-pagination background layout="total, prev, pager, next" :current-page="query.page"
+					:page-size="query.rows" :total="pageTotal" @current-change="handlePageChange"></el-pagination>
 			</div>
 		</div>
-		<el-dialog
-			:title="idEdit ? '编辑评价' : '新增评价'"
-			v-model="visible"
-			width="500px"
-			destroy-on-close
-			:close-on-click-modal="false"
-			@close="closeDialog"
-		>
+		<el-dialog :title="idEdit ? '编辑评价' : '新增评价'" v-model="visible" width="500px" destroy-on-close
+			:close-on-click-modal="false" @close="closeDialog">
 			<CommentEdit :data="rowData" :edit="idEdit" :update="updateData" :courseId="route.params.id" />
 		</el-dialog>
 	</div>
@@ -56,9 +40,10 @@
 
 <script setup lang="ts" name="basetable">
 import { ref, reactive } from 'vue';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ElMessage, ElMessageBox, progressProps } from 'element-plus';
 import { Delete, CirclePlusFilled } from '@element-plus/icons-vue';
-import { getCourseCommentPage,deleteCourseComment } from '../api/index';
+import { getCourseCommentPage, deleteCourseComment, createCourseEvaluation } from '../api/index';
+import { classifyAndAnalyseRemark } from '../api/external_index';
 import CommentEdit from '../components/comment/comment-edit.vue';
 import CommentDetail from '../components/comment/comment-detail.vue';
 import { useRoute } from 'vue-router';
@@ -89,7 +74,7 @@ const pageTotal = ref(0);
 const getData = async () => {
 	const res = await getCourseCommentPage(query);
 	tableData.value = res.records;
-	pageTotal.value = res.total || 50;
+	pageTotal.value = res.total || 0;
 };
 getData();
 
@@ -117,8 +102,32 @@ const handleDelete = async (index: number) => {
 	}
 };
 
-const generateComprehensiveEvaluation = () => {
-	ElMessage.success('生成成功');
+const generateComprehensiveEvaluation = async () => {
+	try {
+		const query_page = {
+			courseId: route.params.id,
+			page: 1,
+			rows: 5000
+		};
+		const res = await getCourseCommentPage(query_page);
+		if (res.records.length === 0) {
+			ElMessage.error('暂无评价数据');
+			return;
+		}
+		const py_result = classifyAndAnalyseRemark(res.records);
+		if (!py_result) {
+			ElMessage.error('生成失败');
+			return;
+		}
+		const evaluation_data = {
+			courseId: route.params.id,
+			...py_result
+		};
+		await createCourseEvaluation(evaluation_data);
+		ElMessage.success('生成成功');
+	} catch (error) {
+		ElMessage.error('生成失败');
+	}
 };
 
 
@@ -157,6 +166,7 @@ const closeDialog = () => {
 .mr10 {
 	margin-right: 10px;
 }
+
 .table-td-thumb {
 	display: block;
 	margin: auto;
