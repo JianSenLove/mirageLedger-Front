@@ -3,7 +3,7 @@ import router from '../router';
 
 const service: AxiosInstance = axios.create({
     baseURL: 'http://127.0.0.1:5000',
-    timeout: 5000
+    timeout: 500000
 });
 
 // 请求拦截器

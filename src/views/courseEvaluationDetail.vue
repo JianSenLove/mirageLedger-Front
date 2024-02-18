@@ -4,19 +4,21 @@
 			<div class="search-box">
 				<el-input v-model="query.courseId" placeholder="课程名" class="search-input mr10" clearable></el-input>
 				<el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
-				<el-button type="success" :icon="CirclePlusFilled"
-					@click="generateComprehensiveEvaluation">生成课程综合评价指标</el-button>
+				<el-button :loading="loading" type="success" icon="el-icon-loading"
+					@click="generateComprehensiveEvaluation">
+					生成课程综合评价指标
+				</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
-				<el-table-column prop="courseName" label="课程名" align="center"></el-table-column>
+				<!-- <el-table-column prop="courseName" label="课程名" align="center"></el-table-column>
 				<el-table-column prop="department" label="所属院系" align="center"></el-table-column>
 				<el-table-column prop="userName" label="教师名称" align="center"></el-table-column>
-				<el-table-column prop="year" label="学年" align="center"></el-table-column>
-				<el-table-column prop="term" width="40" label="学期" align="center"></el-table-column>
-				<el-table-column prop="comment" width="80" label="学生评论" align="center"></el-table-column>
+				<el-table-column prop="year" label="学年" align="center"></el-table-column> -->
+				<!-- <el-table-column prop="term" width="40" label="学期" align="center"></el-table-column> -->
+				<el-table-column prop="comment" label="学生评论" align="center"></el-table-column>
 				<el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
-				<el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
+				<!-- <el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column> -->
 				<el-table-column label="操作" width="280" align="center">
 					<template #default="scope">
 						<el-button type="danger" size="small" :icon="Delete" @click="handleDelete(scope.$index)"
@@ -47,6 +49,7 @@ import { classifyAndAnalyseRemark } from '../api/external_index';
 import CommentEdit from '../components/comment/comment-edit.vue';
 import CommentDetail from '../components/comment/comment-detail.vue';
 import { useRoute } from 'vue-router';
+const loading = ref(false);
 
 const route = useRoute();
 
@@ -103,6 +106,7 @@ const handleDelete = async (index: number) => {
 };
 
 const generateComprehensiveEvaluation = async () => {
+	loading.value = true;
 	try {
 		const query_page = {
 			courseId: route.params.id,
@@ -114,8 +118,8 @@ const generateComprehensiveEvaluation = async () => {
 			ElMessage.error('暂无评价数据');
 			return;
 		}
-		const py_result =  await classifyAndAnalyseRemark(res.records);
-		if (!py_result) {
+		const py_result = await classifyAndAnalyseRemark(res.records);
+		if (!py_result.teachingContent) {
 			ElMessage.error('生成失败');
 			return;
 		}
@@ -127,7 +131,9 @@ const generateComprehensiveEvaluation = async () => {
 		ElMessage.success('生成成功');
 	} catch (error) {
 		ElMessage.error('生成失败');
-	}
+	} finally {
+    loading.value = false;
+  }
 };
 
 

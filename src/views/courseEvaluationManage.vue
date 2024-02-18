@@ -119,7 +119,7 @@ const pageTotal = ref(0);
 const getData = async () => {
 	const res = await getCourseEvaluationPage(query);
 	tableData.value = res.records;
-	pageTotal.value = res.total || 50;
+	pageTotal.value = res.total || 0;
 };
 getData();
 
@@ -189,7 +189,7 @@ const handleView = (row: EvaluationDetail) => {
 const router = useRouter();
 const turnToEvaluation = (row: EvaluationDetail) => {
   // 假设 row.id 是课程的唯一标识
-  router.push({ name: 'courseEvaluationDetail', params: { id: row.id } });
+  router.push({ name: 'courseEvaluationEchars', params: { data: row } });
 };
 </script>
 
