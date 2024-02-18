@@ -30,10 +30,7 @@
 				</el-table-column>
 				<el-table-column label="操作" width="280" align="center">
 					<template #default="scope">
-						<el-button type="warning" size="small" :icon="View" @click="handleView(scope.row)">
-							查看
-						</el-button>
-						<el-button
+						<!-- <el-button
 							type="primary"
 							size="small"
 							:icon="Edit"
@@ -41,8 +38,8 @@
 							v-permiss="15"
 						>
 							编辑
-						</el-button>
-						<el-button
+						</el-button> -->
+						<!-- <el-button
 							type="danger"
 							size="small"
 							:icon="Delete"
@@ -50,9 +47,9 @@
 							v-permiss="16"
 						>
 							删除
-						</el-button>
+						</el-button> -->
 						<el-button type="success" size="small" :icon="View" @click="turnToEvaluation(scope.row)">
-							查看课程评价
+							查看分析图
 						</el-button>
 					</template>
 				</el-table-column>
