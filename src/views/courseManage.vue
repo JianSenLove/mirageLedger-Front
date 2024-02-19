@@ -9,6 +9,7 @@
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
 				<el-table-column prop="name" label="课程名" align="center"></el-table-column>
+				<el-table-column prop="deprtment" label="所属学院" align="center"></el-table-column>
 				<el-table-column prop="userName" label="课程教师" align="center"></el-table-column>
 				<el-table-column prop="term" label="课程学年" align="center"></el-table-column>
 				<el-table-column prop="desc" label="课程描述" align="center"></el-table-column>
