@@ -180,22 +180,49 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.common-layout {
+  display: flex;
+  justify-content: space-between;
+}
+
+.el-aside {
+  padding: 20px;
+  border-right: 1px solid #eff2f6;
+}
+
 .schart-box {
-  display: inline-block;
   margin: 20px;
+  text-align: center;
 }
 
 .schart {
-  width: 600px;
+  display: inline-block;
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
   height: 400px;
 }
 
 .content-title {
-  clear: both;
   font-weight: 400;
   line-height: 50px;
-  margin: 10px 0;
+  margin: 20px 0;
   font-size: 22px;
   color: #1f2f3d;
+}
+
+.search-box {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-input {
+  width: calc(100% - 120px);
+  margin-right: 10px;
+}
+
+.pagination {
+  margin-top: 20px;
 }
 </style>
