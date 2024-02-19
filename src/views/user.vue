@@ -30,10 +30,10 @@
 					<el-form label-width="90px">
 						<el-form-item label="用户名："> {{ name }} </el-form-item>
 						<el-form-item label="旧密码：">
-							<el-input type="password" v-model="form.old"></el-input>
+							<el-input type="password" v-model="form.old_password"></el-input>
 						</el-form-item>
 						<el-form-item label="新密码：">
-							<el-input type="password" v-model="form.new"></el-input>
+							<el-input type="password" v-model="form.password"></el-input>
 						</el-form-item>
 						<el-form-item label="个人简介：">
 							<el-input v-model="form.desc"></el-input>
@@ -46,19 +46,12 @@
 			</el-col>
 		</el-row>
 		<el-dialog title="裁剪图片" v-model="dialogVisible" width="600px">
-			<vue-cropper
-				ref="cropper"
-				:src="imgSrc"
-				:ready="cropImage"
-				:zoom="cropImage"
-				:cropmove="cropImage"
-				style="width: 100%; height: 400px"
-			></vue-cropper>
+			<vue-cropper ref="cropper" :src="imgSrc" :ready="cropImage" :zoom="cropImage" :cropmove="cropImage"
+				style="width: 100%; height: 400px"></vue-cropper>
 
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button class="crop-demo-btn" type="primary"
-						>选择图片
+					<el-button class="crop-demo-btn" type="primary">选择图片
 						<input class="crop-input" type="file" name="image" accept="image/*" @change="setImage" />
 					</el-button>
 					<el-button type="primary" @click="saveAvatar">上传并保存</el-button>
@@ -69,18 +62,49 @@
 </template>
 
 <script setup lang="ts" name="user">
-import { reactive, ref } from 'vue';
+import { reactive, ref, onMounted } from 'vue';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 import avatar from '../assets/img/leimu.jpg';
+import { updateUser, getUserByCode } from '../api/index';
+import { ElMessage } from 'element-plus';
 
 const name = localStorage.getItem('ms_username');
+let userID = null;
+let oldPassWord = null;
+let old_desc = null;
 const form = reactive({
-	old: '',
-	new: '',
-	desc: '不可能！我的代码怎么可能会有bug！'
+	old_password: '',
+	password: '',
+	desc: old_desc
 });
-const onSubmit = () => {};
+
+onMounted(async () => {
+
+	const response = await getUserByCode(localStorage.getItem('ms_username'));
+	userID = response.id;
+	oldPassWord = response.password;
+	old_desc = response.desc;
+});
+
+const onSubmit = async () => {
+	// 确保新密码不为空且旧密码匹配
+	if (form.old_password === oldPassWord && form.password.trim() !== '') {
+		try {
+			const res = await updateUser(userID, form);
+			ElMessage.success('密码更新成功');
+			form.old_password = '';
+			form.password = '';
+		} catch (error) {
+			ElMessage.error('密码更新失败');
+		}
+	} else if (form.old_password !== oldPassWord) {
+		ElMessage.error('旧密码不正确');
+	} else {
+		ElMessage.error('新密码不能为空');
+	}
+};
+
 
 const avatarImg = ref(avatar);
 const imgSrc = ref('');
@@ -122,6 +146,7 @@ const saveAvatar = () => {
 	text-align: center;
 	padding: 35px 0;
 }
+
 .info-image {
 	position: relative;
 	margin: auto;
@@ -146,22 +171,27 @@ const saveAvatar = () => {
 	opacity: 0;
 	transition: opacity 0.3s ease;
 }
+
 .info-edit i {
 	color: #eee;
 	font-size: 25px;
 }
+
 .info-image:hover .info-edit {
 	opacity: 1;
 }
+
 .info-name {
 	margin: 15px 0 10px;
 	font-size: 24px;
 	font-weight: 500;
 	color: #262626;
 }
+
 .crop-demo-btn {
 	position: relative;
 }
+
 .crop-input {
 	position: absolute;
 	width: 100px;

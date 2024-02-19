@@ -36,6 +36,14 @@ export const getUser = (id: string) => {
     });
 };
 
+// 根据code获取用户
+export const getUserByCode = (code: string) => {
+    return request({
+        url: `/mirageLedger/user/code/${code}`,
+        method: 'get'
+    });
+};
+
 // 修改用户
 export const updateUser = (id: string, form: any) => {
     return request({

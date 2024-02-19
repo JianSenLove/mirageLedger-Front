@@ -4,7 +4,7 @@
 			<div class="search-box">
 				<el-input v-model="query.name" placeholder="课程名" class="search-input mr10" clearable></el-input>
 				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
-				<el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
+				<!-- <el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button> -->
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
@@ -21,13 +21,6 @@
 				<el-table-column prop="learningHarvest" width="80" label="学习收获评价分" align="center"></el-table-column> -->
 				<el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
 				<el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
-				<el-table-column label="课程开设状态" align="center">
-					<template #default="scope">
-						<el-tag :type="scope.row.state ? 'success' : 'danger'">
-							{{ scope.row.state ? '开设中' : '已关闭' }}  
-						</el-tag>
-					</template>
-				</el-table-column>
 				<el-table-column label="操作" width="280" align="center">
 					<template #default="scope">
 						<!-- <el-button

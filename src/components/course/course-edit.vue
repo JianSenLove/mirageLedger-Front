@@ -1,19 +1,23 @@
 <template>
 	<el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
 		<el-form-item label="课程名称" prop="name">
-			<el-input v-model="form.name" :disabled="edit"></el-input>
+			<el-input v-model="form.name" :disabled="edit" placeholder="课程名称"></el-input>
 		</el-form-item>
-		<el-form-item label="课程教师" prop="userName">
-			<el-input v-model="form.userName"></el-input>
+		<el-form-item label="课程教师" prop="userId">
+			<el-select v-model="form.userId" filterable placeholder="请选择教师">
+				<el-option v-for="teacher in teacherList" :key="teacher.id" :label="teacher.name"
+					:value="teacher.id">
+				</el-option>
+			</el-select>
 		</el-form-item>
 		<el-form-item label="课程学年" prop="year">
-			<el-input v-model="form.year"></el-input>
+			<el-input v-model="form.year" placeholder="格式:2021-2022"></el-input>
 		</el-form-item>
 		<el-form-item label="课程学期" prop="term">
-			<el-input v-model="form.term"></el-input>
+			<el-input v-model="form.term" placeholder="1或2"></el-input>
 		</el-form-item>
 		<el-form-item label="课程描述" prop="desc">
-			<el-input type="textarea" v-model="form.desc"></el-input>
+			<el-input type="textarea" v-model="form.desc" placeholder="课程描述"></el-input>
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="saveEdit(formRef)">
@@ -26,8 +30,8 @@
 
 <script lang="ts" setup>
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
-import { ref } from 'vue';
-import { createCourse, updateCourse } from '../../api/index';
+import { ref, onMounted } from 'vue';
+import { createCourse, updateCourse, getUserPage } from '../../api/index';
 
 const props = defineProps({
 	data: {
@@ -51,22 +55,36 @@ const defaultData = {
 	userId: '',
 	year: '',
 	term: '',
-	desc:'',
+	desc: '',
 	createTime: '',
 	updateTime: '',
 };
 
-const form = ref({ ...(props.edit ? props.data : defaultData)});
+const form = ref({ ...(props.edit ? props.data : defaultData) });
 
 const rules: FormRules = {
-	userName: [{ required: true, message: '请选择教师', trigger: 'blur' }],
+	userId: [{ required: true, message: '请选择教师', trigger: 'blur' }],
 	term: [
-	{ required: true, message: '请输入学期', trigger: 'blur' }
+		{ required: true, message: '请输入学期', trigger: 'blur' }
 	],
 	name: [{ required: true, message: '请输入课程名称', trigger: 'blur' }],
 	year: [{ required: true, message: '请输入学年', trigger: 'blur' }],
 };
 const formRef = ref<FormInstance>();
+const teacherList = ref([]);
+
+onMounted(async () => {
+	try {
+		const queryList = {
+			page: 1,
+			rows: 200
+		}
+		const response = await getUserPage(queryList);
+		teacherList.value = response.records;
+	} catch (error) {
+		ElMessage.error('教师信息获取失败！');
+	}
+});
 
 const saveEdit = async () => {
 	await formRef.value?.validate(async (valid) => {
