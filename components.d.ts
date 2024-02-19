@@ -11,7 +11,6 @@ declare module '@vue/runtime-core' {
     CommentEdit: typeof import('./src/components/comment/comment-edit.vue')['default']
     CourseDetail: typeof import('./src/components/course/course-detail.vue')['default']
     CourseEdit: typeof import('./src/components/course/course-edit.vue')['default']
-    ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
