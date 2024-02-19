@@ -182,3 +182,11 @@ export const deleteCourseComment = (id: string) => {
         method: 'delete',
     });
 };
+
+// 判断课程评论是否已存在
+export const isExistEvaluation = (courseId: string) => {
+    return request({
+        url: `/mirageLedger/evaluation/exist/${courseId}`,
+        method: 'get'
+    });
+};

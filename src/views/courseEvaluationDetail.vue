@@ -44,7 +44,7 @@
 import { ref, reactive } from 'vue';
 import { ElMessage, ElMessageBox, progressProps } from 'element-plus';
 import { Delete, CirclePlusFilled } from '@element-plus/icons-vue';
-import { getCourseCommentPage, deleteCourseComment, createCourseEvaluation } from '../api/index';
+import { getCourseCommentPage, deleteCourseComment, createCourseEvaluation, isExistEvaluation } from '../api/index';
 import { classifyAndAnalyseRemark } from '../api/external_index';
 import CommentEdit from '../components/comment/comment-edit.vue';
 import CommentDetail from '../components/comment/comment-detail.vue';
@@ -113,6 +113,12 @@ const generateComprehensiveEvaluation = async () => {
 			page: 1,
 			rows: 10
 		};
+		
+		const isExist = await isExistEvaluation(route.params.id.toString());
+		if (isExist) {
+			ElMessage.error('该课程已经生成过评价数据');
+			return;
+		}
 		const res = await getCourseCommentPage(query_page);
 		if (res.records.length === 0) {
 			ElMessage.error('暂无评价数据');
