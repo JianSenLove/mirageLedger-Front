@@ -1,12 +1,12 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside width="500px">
-        <el-table :data="indicatorData" style="width: 100%">
-          <el-table-column prop="name" label="评价类别" width="180"></el-table-column>
+      <el-header>
+        <el-table :data="indicatorData" border style="width: 100%">
+          <el-table-column prop="name" label="评价类别" width="500"></el-table-column>
           <el-table-column prop="value" label="分值"></el-table-column>
         </el-table>
-      </el-aside>
+      </el-header>
       <el-main>
         <div class="schart-box">
           <div class="content-title">正负柱状图</div>
@@ -21,12 +21,14 @@
   </div>
 </template>
 
+
 <script setup lang="ts" name="basecharts">
 import { useRoute } from 'vue-router';
 import * as echarts from 'echarts';
 import { getCourseEvaluation } from '../api/index';
 import { ElMessage } from 'element-plus';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onActivated } from 'vue';
+
 
 const route = useRoute();
 
@@ -41,6 +43,9 @@ const default_data = {
   learningHarvest: 0.28
 }
 const indicatorData = ref([]);
+
+let myChart = null;
+let myChart_pie = null;
 
 onMounted(async () => {
   // 请求评价接口，获取数据
@@ -66,8 +71,7 @@ onMounted(async () => {
     ElMessage.error('数据获取失败');
   }
 
-  var chartDom = document.getElementById('echart_bar');
-  var myChart = echarts.init(chartDom);
+  myChart = echarts.init(document.getElementById('echart_bar'));
   var option;
 
   option = {
@@ -132,8 +136,7 @@ onMounted(async () => {
   option && myChart.setOption(option);
 
   //饼状图
-  var chartDom_pie = document.getElementById('echart_pie');
-  var myChart_pie = echarts.init(chartDom_pie);
+  myChart_pie = echarts.init(document.getElementById('echart_pie'));
   var option_pie;
 
   option_pie = {
@@ -176,53 +179,32 @@ onMounted(async () => {
   option_pie && myChart_pie.setOption(option_pie);
 })
 
+onActivated(() => {
+  myChart && myChart.resize();
+  myChart_pie && myChart_pie.resize();
+});
+
 
 </script>
 
 <style scoped>
-.common-layout {
-  display: flex;
-  justify-content: space-between;
-}
-
-.el-aside {
-  padding: 20px;
-  border-right: 1px solid #eff2f6;
-}
-
 .schart-box {
-  margin: 20px;
-  text-align: center;
+  display: inline-block;
+  margin-top: 260px;
+  /* margin-left: 50px; */
 }
 
 .schart {
-  display: inline-block;
-  margin: auto;
-  width: 100%;
-  max-width: 600px;
+  width: 600px;
   height: 400px;
 }
 
 .content-title {
+  clear: both;
   font-weight: 400;
   line-height: 50px;
-  margin: 20px 0;
+  margin: 10px 0;
   font-size: 22px;
   color: #1f2f3d;
-}
-
-.search-box {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.search-input {
-  width: calc(100% - 120px);
-  margin-right: 10px;
-}
-
-.pagination {
-  margin-top: 20px;
 }
 </style>
