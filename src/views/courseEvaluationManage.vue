@@ -13,12 +13,12 @@
 				<el-table-column prop="userName" label="教师名称" align="center"></el-table-column>
 				<el-table-column prop="year" label="学年" align="center"></el-table-column>
 				<el-table-column prop="term" width="40" label="学期" align="center"></el-table-column>
-				<el-table-column prop="teachingContent" width="80" label="教学内容评价分" align="center"></el-table-column>
+				<!-- <el-table-column prop="teachingContent" width="80" label="教学内容评价分" align="center"></el-table-column>
 				<el-table-column prop="teachingMethod" width="80" label="教学方法评价分" align="center"></el-table-column>
 				<el-table-column prop="curriculumManagement" width="80" label="课程管理评价分" align="center"></el-table-column>
 				<el-table-column prop="courseAssessment" width="80" label="课程考核评价分" align="center"></el-table-column>
 				<el-table-column prop="teachingAttitude" width="80" label="教学态度评价分" align="center"></el-table-column>
-				<el-table-column prop="learningHarvest" width="80" label="学习收获评价分" align="center"></el-table-column>
+				<el-table-column prop="learningHarvest" width="80" label="学习收获评价分" align="center"></el-table-column> -->
 				<el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
 				<el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
 				<el-table-column label="课程开设状态" align="center">

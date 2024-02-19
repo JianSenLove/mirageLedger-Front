@@ -3,8 +3,8 @@
 		<el-form-item label="工号" prop="code">
 			<el-input v-model="form.code" :disabled="edit"></el-input>
 		</el-form-item>
-		<el-form-item label="工号" prop="code">
-			<el-input v-model="form.department" :disabled="edit"></el-input>
+		<el-form-item label="院系" prop="department">
+			<el-input v-model="form.department"></el-input>
 		</el-form-item>
 		<el-form-item label="密码" prop="password">
 			<el-input type="password" v-model="form.password"></el-input>

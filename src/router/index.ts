@@ -176,7 +176,7 @@ const routes: RouteRecordRaw[] = [
                 component: () => import(/* webpackChunkName: "import" */ '../views/courseEvaluationManage.vue'),
             },
             {
-                path: '/courseEvaluationEchars',
+                path: '/courseEvaluationEchars/:evaluationId',
                 name: 'courseEvaluationEchars',
                 meta: {
                     title: '课程评价分析图',
