@@ -10,7 +10,7 @@
 				</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
-				<el-table-column prop="id" label="ID" width="300" align="center"></el-table-column>
+				<!-- <el-table-column prop="id" label="ID" width="300" align="center"></el-table-column> -->
 				<!-- <el-table-column prop="courseName" label="课程名" align="center"></el-table-column>
 				<el-table-column prop="department" label="所属院系" align="center"></el-table-column>
 				<el-table-column prop="userName" label="教师名称" align="center"></el-table-column>
