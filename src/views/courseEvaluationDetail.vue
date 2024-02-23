@@ -131,7 +131,7 @@ const generateComprehensiveEvaluation = async () => {
 		}
 		const py_result = await classifyAndAnalyseRemark(res.records);
 		if (!py_result.teachingContent) {
-			ElMessage.error('生成失败');
+			ElMessage.error('生成异常');
 			return;
 		}
 		const evaluation_data = {
@@ -141,7 +141,7 @@ const generateComprehensiveEvaluation = async () => {
 		await createCourseEvaluation(evaluation_data);
 		ElMessage.success('生成成功');
 	} catch (error) {
-		ElMessage.error('生成失败');
+		ElMessage.error('网络错误');
 	} finally {
     loading.value = false;
   }
