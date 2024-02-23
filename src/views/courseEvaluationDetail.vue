@@ -4,7 +4,7 @@
 			<div class="search-box">
 				<el-input v-model="query.courseId" placeholder="课程名" class="search-input mr10" clearable></el-input>
 				<el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
-				<el-button :loading="loading" type="success" icon="el-icon-loading"
+				<el-button v-if="isAdmin" :loading="loading" type="success" icon="el-icon-loading"
 					@click="generateComprehensiveEvaluation">
 					生成课程综合评价指标
 				</el-button>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts" name="basetable">
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { ElMessage, ElMessageBox, progressProps } from 'element-plus';
 import { Delete, CirclePlusFilled } from '@element-plus/icons-vue';
 import { getCourseCommentPage, deleteCourseComment, createCourseEvaluation, isExistEvaluation } from '../api/index';
@@ -50,6 +50,11 @@ import CommentEdit from '../components/comment/comment-edit.vue';
 import CommentDetail from '../components/comment/comment-detail.vue';
 import { useRoute } from 'vue-router';
 const loading = ref(false);
+const isAdmin = ref(false);
+
+onMounted(() => {
+  isAdmin.value = localStorage.getItem('ms_username') === 'admin';
+});
 
 const route = useRoute();
 

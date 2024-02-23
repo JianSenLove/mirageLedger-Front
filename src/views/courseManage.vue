@@ -4,7 +4,7 @@
 			<div class="search-box">
 				<el-input v-model="query.name" placeholder="课程名" class="search-input mr10" clearable></el-input>
 				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
-				<el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
+				<el-button v-if="isAdmin" type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button>
 			</div>
 			<el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
 				<!-- <el-table-column prop="id" label="ID" width="300" align="center"></el-table-column> -->
@@ -79,13 +79,20 @@
 </template>
 
 <script setup lang="ts" name="basetable">
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Edit, Search, CirclePlusFilled, View } from '@element-plus/icons-vue';
 import { getCoursePage,deleteCourse,updateCourse } from '../api/index';
 import CourseEdit from '../components/course/course-edit.vue';
 import CourseDetail from '../components/course/course-detail.vue';
+
+const isAdmin = ref(false);
+
+onMounted(() => {
+  isAdmin.value = localStorage.getItem('ms_username') === 'admin';
+});
+
 
 interface CourseDetail {
 	id: string;
