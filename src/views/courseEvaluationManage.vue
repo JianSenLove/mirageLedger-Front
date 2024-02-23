@@ -2,7 +2,7 @@
 	<div>
 		<div class="container">
 			<div class="search-box">
-				<el-input v-model="query.name" placeholder="课程名" class="search-input mr10" clearable></el-input>
+				<el-input v-model="query.courseName" placeholder="课程名" class="search-input mr10" clearable></el-input>
 				<el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
 				<!-- <el-button type="warning" :icon="CirclePlusFilled" @click="visible = true">新增</el-button> -->
 			</div>
@@ -75,7 +75,7 @@
 </template>
 
 <script setup lang="ts" name="basetable">
-import { ref, reactive } from 'vue';
+import { ref, reactive,  } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Edit, Search, CirclePlusFilled, View } from '@element-plus/icons-vue';
@@ -103,10 +103,11 @@ interface EvaluationDetail {
 }
 
 const query = reactive({
-	name: '',
+	courseName: '',
 	page: 1,
 	rows: 10
 });
+
 const tableData = ref<EvaluationDetail[]>([]);
 const pageTotal = ref(0);
 // 获取表格数据
