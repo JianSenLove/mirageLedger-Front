@@ -90,12 +90,12 @@ const login = ref<FormInstance>();
                     }
                 } else {
                     // 如果响应中没有token，视为登录失败
-                    ElMessage.error('登录失败: 账号或密码错误');
+                    ElMessage.error(error.message);
                     return false;
                 }
             } catch (error) {
                 // 捕获到错误，可能是请求失败或者其他原因
-                ElMessage.error('登录失败: ' + error);
+                ElMessage.error(error.message);
                 return false;
             }
         } else {

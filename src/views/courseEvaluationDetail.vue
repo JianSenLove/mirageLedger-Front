@@ -100,7 +100,7 @@ const handleDelete = async (index: number) => {
 		ElMessage.success('删除成功');
 	} catch (error) {
 		if (error !== 'cancel') {
-			ElMessage.error('删除失败');
+			ElMessage.error(error.message);
 		}
 	}
 };

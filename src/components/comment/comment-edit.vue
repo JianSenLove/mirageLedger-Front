@@ -73,7 +73,7 @@ const saveEdit = async () => {
 				props.update(response);
 				ElMessage.success(props.edit ? '保存成功！' : '创建成功！');
 			} catch (error) {
-				ElMessage.error(error.message || (props.edit ? '保存失败！' : '创建失败！'));
+				ElMessage.error(error.message);
 			}
 		}
 	});

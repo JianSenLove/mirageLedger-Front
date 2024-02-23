@@ -68,7 +68,7 @@ onMounted(async () => {
       ];
     }
   } catch (error) {
-    ElMessage.error('数据获取失败');
+    ElMessage.error(error.message);
   }
 
   myChart = echarts.init(document.getElementById('echart_bar'));

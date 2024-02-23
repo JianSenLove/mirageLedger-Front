@@ -96,7 +96,7 @@ const onSubmit = async () => {
 			form.old_password = '';
 			form.password = '';
 		} catch (error) {
-			ElMessage.error('密码更新失败');
+			ElMessage.error(error.message);
 		}
 	} else if (form.old_password !== oldPassWord) {
 		ElMessage.error('旧密码不正确');
