@@ -64,13 +64,13 @@ const items = [
     },
     {
         icon: 'Odometer',
-        index: '/productManage',
+        index: '/category',
         title: '分类管理',
         permiss: '1',
     },
     {
         icon: 'Odometer',
-        index: '/courseEvaluationManage',
+        index: '/orderManage',
         title: '订单管理',
         permiss: '1',
     }

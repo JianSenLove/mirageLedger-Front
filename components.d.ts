@@ -7,6 +7,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CategoryDetail: typeof import('./src/components/category/category-detail.vue')['default']
+    CategoryEdit: typeof import('./src/components/category/category-edit.vue')['default']
     CommentDetail: typeof import('./src/components/comment/comment-detail.vue')['default']
     CommentEdit: typeof import('./src/components/comment/comment-edit.vue')['default']
     CourseDetail: typeof import('./src/components/product/course-detail.vue')['default']
@@ -41,6 +43,8 @@ declare module '@vue/runtime-core' {
     EvaluationDetail: typeof import('./src/components/evaluation/evaluation-detail.vue')['default']
     EvaluationEdit: typeof import('./src/components/evaluation/evaluation-edit.vue')['default']
     Header: typeof import('./src/components/header.vue')['default']
+    OrderDetail: typeof import('./src/components/order/order-detail.vue')['default']
+    OrderEdit: typeof import('./src/components/order/order-edit.vue')['default']
     ProductDetail: typeof import('./src/components/product/product-detail.vue')['default']
     ProductEdit: typeof import('./src/components/product/product-edit.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

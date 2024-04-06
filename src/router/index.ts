@@ -167,13 +167,13 @@ const routes: RouteRecordRaw[] = [
                 component: () => import(/* webpackChunkName: "import" */ '../views/courseEvaluationDetail.vue'),
             },
             {
-                path: '/courseEvaluationManage',
-                name: 'courseEvaluationManage',
+                path: '/orderManage',
+                name: 'orderManage',
                 meta: {
                     title: '课程综合评分',
                     permiss: '1',
                 },
-                component: () => import(/* webpackChunkName: "import" */ '../views/courseEvaluationManage.vue'),
+                component: () => import(/* webpackChunkName: "import" */ '../views/orderManage.vue'),
             },
             {
                 path: '/courseEvaluationEchars/:evaluationId',
@@ -183,6 +183,15 @@ const routes: RouteRecordRaw[] = [
                     permiss: '1',
                 },
                 component: () => import(/* webpackChunkName: "import" */ '../views/courseEvaluationEchars.vue'),
+            },
+            {
+                path: '/category',
+                name: 'categoryManage',
+                meta: {
+                    title: '类别管理',
+                    permiss: '1',
+                },
+                component: () => import(/* webpackChunkName: "import" */ '../views/categoryManage.vue'),
             }
         ],
     },
