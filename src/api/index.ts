@@ -70,6 +70,33 @@ export const getUserPage = (query: any) => {
     });
 };
 
+// 查询分类列表
+export const getCategoryPage = (query: any) => {
+    return request({
+        url: `/mirageLedger/v1/category`,
+        method: 'get',
+        params: query
+    });
+};
+
+// 新增商品
+export const createProduct = (product: any) => {
+    return request({
+        url: '/mirageLedger/v1/product',
+        method: 'post',
+        data: product
+    });
+};
+
+// 修改商品
+export const updateProduct = (id: string, product: any) => {
+    return request({
+        url: `/mirageLedger/v1/product/${id}`,
+        method: 'put',
+        data: product
+    });
+};
+
 // 新增课程
 export const createCourse = (course: any) => {
     return request({
@@ -96,18 +123,18 @@ export const updateCourse = (id: string, course: any) => {
     });
 };
 
-// 删除课程
-export const deleteCourse = (id: string) => {
+// 删除商品
+export const deleteProduct = (id: string) => {
     return request({
-        url: `/mirageLedger/course/${id}`,
+        url: `/mirageLedger/v1/product/${id}`,
         method: 'delete'
     });
 };
 
 // 课程列表
-export const getCoursePage = (query: any) => {
+export const getProductPage = (query: any) => {
     return request({
-        url: `/mirageLedger/course`,
+        url: `/mirageLedger/v1/product`,
         method: 'get',
         params: query
     });

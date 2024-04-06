@@ -53,19 +53,25 @@ const items = [
     {
         icon: 'Odometer',
         index: '/userManage',
-        title: '教师管理',
+        title: '用户管理',
         permiss: '4',
     },
     {
         icon: 'Odometer',
-        index: '/courseManage',
-        title: '课程管理',
+        index: '/productManage',
+        title: '商品管理',
+        permiss: '1',
+    },
+    {
+        icon: 'Odometer',
+        index: '/productManage',
+        title: '分类管理',
         permiss: '1',
     },
     {
         icon: 'Odometer',
         index: '/courseEvaluationManage',
-        title: '课程综合评分',
+        title: '订单管理',
         permiss: '1',
     }
 ];

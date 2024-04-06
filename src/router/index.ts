@@ -149,13 +149,13 @@ const routes: RouteRecordRaw[] = [
                 component: () => import(/* webpackChunkName: "import" */ '../views/userManage.vue'),
             },
             {
-                path: '/courseManage',
-                name: 'courseManage',
+                path: '/productManage',
+                name: 'productManage',
                 meta: {
-                    title: '课程管理',
+                    title: '商品管理',
                     permiss: '1',
                 },
-                component: () => import(/* webpackChunkName: "import" */ '../views/courseManage.vue'),
+                component: () => import(/* webpackChunkName: "import" */ '../views/productManage.vue'),
             },
             {
                 path: '/courseEvaluationDetail/:id',
