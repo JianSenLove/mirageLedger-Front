@@ -65,7 +65,7 @@
 								<el-icon class="grid-con-icon"><Goods /></el-icon>
 								<div class="grid-cont-right">
 									<div class="grid-num">5000</div>
-									<div>节假日福利</div>
+									<div>累计销量</div>
 								</div>
 							</div>
 						</el-card>
