@@ -21,15 +21,30 @@
 				<el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
 				<el-table-column label="操作" width="280" align="center">
 					<template #default="scope">
-						<el-button
-							type="primary"
-							size="small"
-							:icon="Edit"
-							@click="handleEdit(scope.$index, scope.row)"
-							v-permiss="15"
-						>
-							编辑
-						</el-button>
+            <el-button
+                type="primary"
+                size="small"
+                @click="handleShip(scope.row)"
+                v-if="scope.row.status === '待发货'"
+            >
+              发货
+            </el-button>
+            <el-button
+                type="success"
+                size="small"
+                @click="handleComplete(scope.row)"
+                v-if="scope.row.status === '待收货'"
+            >
+              完成
+            </el-button>
+            <el-button
+                type="warning"
+                size="small"
+                @click="handleAfterSale(scope.row)"
+                v-if="['待发货', '待收货'].includes(scope.row.status)"
+            >
+              售后
+            </el-button>
 						<el-button
 							type="danger"
 							size="small"
@@ -71,7 +86,7 @@ import { ref, reactive,  } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Edit, Search } from '@element-plus/icons-vue';
-import { getOrderPage,deleteOrder } from '../api/index';
+import { getOrderPage,deleteOrder,updateOrder } from '../api/index';
 import OrderEdit from '../components/order/order-edit.vue';
 
 interface OrderDetail {
@@ -135,6 +150,31 @@ const handleDelete = async (index: number) => {
 		}
 	}
 };
+
+const updateOrderStatus = async (id: string, newStatus: string) => {
+  try {
+    // 构建新的订单对象，这里假设只更新状态
+    const updatedOrder = { status: newStatus };
+    await updateOrder(id, updatedOrder);
+    ElMessage.success(`订单状态已更新为${newStatus}`);
+    getData(); // 重新获取数据，以更新表格显示
+  } catch (error) {
+    ElMessage.error('操作失败: ' + error.message);
+  }
+};
+
+const handleShip = (row: OrderDetail) => {
+  updateOrderStatus(row.id, '待收货');
+};
+
+const handleComplete = (row: OrderDetail) => {
+  updateOrderStatus(row.id, '已完成');
+};
+
+const handleAfterSale = (row: OrderDetail) => {
+  updateOrderStatus(row.id, '售后');
+};
+
 
 const visible = ref(false);
 let idx: number = -1;

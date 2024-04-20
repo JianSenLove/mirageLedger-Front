@@ -1,10 +1,7 @@
 <template>
 	<el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
-		<el-form-item label="工号" prop="code">
+		<el-form-item label="登录账号" prop="code">
 			<el-input v-model="form.code" :disabled="edit"></el-input>
-		</el-form-item>
-		<el-form-item label="院系" prop="department">
-			<el-input v-model="form.department"></el-input>
 		</el-form-item>
 		<el-form-item label="密码" prop="password">
 			<el-input type="password" v-model="form.password"></el-input>
@@ -12,10 +9,10 @@
 		<el-form-item label="确认密码" prop="confirmPassword">
 			<el-input type="password" v-model="form.confirmPassword"></el-input>
 		</el-form-item>
-		<el-form-item label="教师名称" prop="name">
+		<el-form-item label="用户名" prop="name">
 			<el-input v-model="form.name"></el-input>
 		</el-form-item>
-		<el-form-item label="教师描述" prop="desc">
+		<el-form-item label="描述" prop="desc">
 			<el-input type="textarea" v-model="form.desc"></el-input>
 		</el-form-item>
 		<el-form-item>
@@ -50,7 +47,6 @@ const props = defineProps({
 const defaultData = {
 	id: '',
 	code: '',  // 用户登录账号
-	department: '',
 	password: '',  // 账号密码
 	confirmPassword: '',  // 确认密码
 	name: '',  // 用户名称
@@ -88,7 +84,7 @@ const validateConfirmPassword = (rule, value, callback) => {
 };
 
 const rules: FormRules = {
-	code: [{ required: true, message: '请输入工号', trigger: 'blur' }],
+	code: [{ required: true, message: '请输入登录账号', trigger: 'blur' }],
 	password: [
 		{ required: true, message: '请输入账号密码', trigger: 'blur' },
 		{ min: 1, message: '密码长度不能少于1位', trigger: 'blur' }
@@ -97,8 +93,7 @@ const rules: FormRules = {
 		{ required: props.edit ? form.value.passwordEdited : true, message: '请确认密码', trigger: 'blur' },
 		{ validator: validateConfirmPassword, trigger: 'blur' }
 	],
-	name: [{ required: true, message: '请输入教师名称', trigger: 'blur' }],
-	department: [{ required: true, message: '请输入教师所属院系', trigger: 'blur' }]
+	name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
 };
 const formRef = ref<FormInstance>();
 

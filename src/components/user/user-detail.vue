@@ -5,12 +5,8 @@
 			{{ data.id }}
 		</el-descriptions-item>
 		<el-descriptions-item>
-			<template #label> 工号 </template>
+			<template #label> 登陆账号 </template>
 			{{ data.code }}
-		</el-descriptions-item>
-		<el-descriptions-item>
-			<template #label> 所属院系 </template>
-			{{ data.department }}
 		</el-descriptions-item>
 		<el-descriptions-item>
 			<template #label> 用户名 </template>
