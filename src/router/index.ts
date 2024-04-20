@@ -170,7 +170,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/orderManage',
                 name: 'orderManage',
                 meta: {
-                    title: '课程综合评分',
+                    title: '订单管理',
                     permiss: '1',
                 },
                 component: () => import(/* webpackChunkName: "import" */ '../views/orderManage.vue'),

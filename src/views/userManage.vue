@@ -10,6 +10,12 @@
 				<!-- <el-table-column prop="id" label="ID" width="300" align="center"></el-table-column> -->
 				<el-table-column prop="code" label="账号" align="center"></el-table-column>
 				<el-table-column prop="name" label="用户名" align="center"></el-table-column>
+        <el-table-column label="用户头像" align="center">
+          <template #default="scope">
+            <!--						<img :src="scope.row.image" alt="商品图片" style="width: 100px; height: auto;">-->
+            <img :src="`${scope.row.image}?time=${new Date().getTime()}`" alt="用户头像" style="width: 100px; height: auto;">
+          </template>
+        </el-table-column>
 				<el-table-column prop="desc" label="描述" align="center"></el-table-column>
 				<el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
 				<el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
@@ -62,6 +68,7 @@ interface UserDetail {
 	createTime: string;
 	updateTime: string;
 	state: string;
+  image: string;
 }
 
 const query = reactive({

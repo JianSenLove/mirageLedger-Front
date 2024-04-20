@@ -56,7 +56,7 @@
 import { ref, reactive, onMounted } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Delete, Edit, Search, CirclePlusFilled, View } from '@element-plus/icons-vue';
-import { getProductPage, deleteProduct, updateCourse } from '../api/index';
+import { getProductPage, deleteProduct } from '../api/index';
 import ProductEdit from '../components/product/product-edit.vue';
 import ProductDetail from '../components/product/product-detail.vue';
 
