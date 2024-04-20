@@ -11,7 +11,8 @@
 				<el-table-column prop="name" label="商品名称" align="center"></el-table-column>
 				<el-table-column label="商品图片" align="center">
 					<template #default="scope">
-						<img :src="scope.row.image" alt="商品图片" style="width: 100px; height: auto;">
+<!--						<img :src="scope.row.image" alt="商品图片" style="width: 100px; height: auto;">-->
+						<img :src="`${scope.row.image}?time=${new Date().getTime()}`" alt="商品图片" style="width: 100px; height: auto;">
 					</template>
 				</el-table-column>
 				<el-table-column prop="categoryName" label="商品类别" align="center"></el-table-column>

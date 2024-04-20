@@ -186,7 +186,7 @@ export const getOrderPage = (query: any) => {
 // 商品列表
 export const getProductPage = (query: any) => {
     return request({
-        url: `/mirageLedger/v1/product`,
+        url: `/mirageLedger/v1/product/normal`,
         method: 'get',
         params: query
     });
@@ -275,5 +275,14 @@ export const isExistEvaluation = (courseId: string) => {
     return request({
         url: `/mirageLedger/evaluation/exist/${courseId}`,
         method: 'get'
+    });
+};
+
+// 图片上传
+export const uploadImage = (file: any) => {
+    return request({
+        url: `/mirageLedger/image/upload`,
+        method: 'post',
+        data: file
     });
 };

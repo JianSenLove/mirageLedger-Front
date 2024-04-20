@@ -40,6 +40,7 @@ declare module '@vue/runtime-core' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     EvaluationDetail: typeof import('./src/components/evaluation/evaluation-detail.vue')['default']
     EvaluationEdit: typeof import('./src/components/evaluation/evaluation-edit.vue')['default']
     Header: typeof import('./src/components/header.vue')['default']

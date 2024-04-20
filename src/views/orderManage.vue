@@ -93,7 +93,8 @@ const orderStatusOptions = ref([
   { label: '待付款', value: '待付款' },
   { label: '待发货', value: '待发货' },
   { label: '待收货', value: '待收货' },
-  { label: '售后', value: '售后' }
+  { label: '售后', value: '售后' },
+  { label: '已完成', value: '已完成' }
 ]);
 
 const tableData = ref<OrderDetail[]>([]);

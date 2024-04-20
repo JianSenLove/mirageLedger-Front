@@ -1,16 +1,16 @@
 <template>
 	<el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
 		<el-form-item label="订单编号" prop="name">
-			<el-input v-model="form.id"  placeholder="订单编号"></el-input>
+			<el-input v-model="form.id"  placeholder="订单编号" :disabled="edit"></el-input>
 		</el-form-item>
     <el-form-item  label="订单用户" prop="name">
-      <el-input v-model="form.userId"  placeholder="订单所属用户"></el-input>
+      <el-input v-model="form.userId"  placeholder="订单所属用户" :disabled="edit"></el-input>
     </el-form-item>
     <el-form-item  label="订单金额" prop="name">
       <el-input v-model="form.orderPrice"  placeholder="订单金额"></el-input>
     </el-form-item>
     <el-form-item  label="订单状态" prop="name">
-      <el-input v-model="form.status"  placeholder="订单状态"></el-input>
+      <el-input v-model="form.status"  placeholder="订单状态" :disabled="edit"></el-input>
     </el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="saveEdit(formRef)">
@@ -53,7 +53,6 @@ const defaultData = {
 const form = ref({ ...(props.edit ? props.data : defaultData) });
 
 const rules: FormRules = {
-	name: [{ required: true, message: '请输入类别名称', trigger: 'blur' }],
 };
 const formRef = ref<FormInstance>();
 const teacherList = ref([]);
