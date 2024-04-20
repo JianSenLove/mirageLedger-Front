@@ -80,6 +80,7 @@ const rules: FormRules = {
 	],
 	name: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
 	stock: [{ required: true, message: '请输入商品库存', trigger: 'blur' }],
+  categoryId: [{ required: true, message: '请选择商品类别', trigger: 'blur' }],
   image: [
     {
       validator: (rule, value, callback) => {
